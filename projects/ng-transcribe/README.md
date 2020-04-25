@@ -67,7 +67,7 @@ The file above is self explanatory, we set which is the language we have to pick
 One last thing, add the language file in scripts array of angular.json
 
 ```ts
- scripts: ["src/locale.en.js"]
+ scripts: ["src/locale.js"]
 ```
 
 That's it, start using,
