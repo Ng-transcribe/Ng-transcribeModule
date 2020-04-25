@@ -1,6 +1,6 @@
 # NgTranscribe
 
-A simple and intuitive library to support Internationaliastion in Angular applications.
+A simple and intuitive library to support Internationalisation in Angular applications.
 
 Inspired by https://github.com/ngx-translate/core
 
@@ -9,7 +9,7 @@ The project is in the begining stages and doesn't have features like 'loading tr
 
 ## How to add it to your project?
 
-First you need to install the npm module:
+First you need to install the npm package:
 
 ```sh
 npm install ng-transcribe --save
@@ -30,7 +30,7 @@ import { NgTranscribeModule } from 'ng-transcribe'
 @NgModule({
     imports: [
         CommonModule,
-        TranslateModule
+        NgTranscribeModule
     ]
 })
 
@@ -62,7 +62,13 @@ locale = {
     }
 }
 ```
-The file above is self explanatory, we set which is the language we have to pick the codes from and where do we have to look for if some code is missing in the primary language. We recommend usinf snake case for keys and not use '.' period as it will have adverse effects in picking the right value.
+The file above is self explanatory, we set which is the language we have to pick the codes from and where do we have to look for if some code is missing in the primary language. We recommend using snake case for keys and not use '.'(period) as it will have adverse effects in picking the right value.
+
+One last thing, add the language file in scripts array of angular.json
+
+```ts
+ scripts: ["src/locale.en.js"]
+```
 
 That's it, start using,
 
