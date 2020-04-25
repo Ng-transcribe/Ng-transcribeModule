@@ -1,6 +1,20 @@
 {
   "name": "ng-transcribe",
   "version": "0.0.1",
+  "homepage": "https://github.com/Ng-transcribe/Ng-transcribeModule#readme",
+  "keywords": [
+    "Angular",
+    "Internationalisation",
+    "i18n",
+    "translate",
+    "ng-translate",
+    "ng-transcribe"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Ng-transcribe/Ng-transcribeModule"
+  },
+  "license" : "BSD-3-Clause",
   "peerDependencies": {
     "@angular/common": "^8.2.14",
     "@angular/core": "^8.2.14"
