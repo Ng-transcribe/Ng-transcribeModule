@@ -1,27 +1,142 @@
 # NgTranscribe
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.25.
+A simple and intuitive library to support Internationalisation in Angular applications.
 
-## Development server
+Inspired by https://github.com/ngx-translate/core
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+This library is mainly concentrated on not having any impacts for testing the components individually or integrate it with libraries like storybook. Support of Angular versions below 8.2 is not considered. 
+The project is in the begining stages and doesn't have features like 'loading translation files from a server' and 'language change at runtime'. They will be added soon based on the community needs.
 
-## Code scaffolding
+## How to add it to your project?
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+First you need to install the npm package:
 
-## Build
+```sh
+npm install ng-transcribe --save
+```
+or
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+```sh
+yarn add ng-transcribe
+```
 
-## Running unit tests
+## How to use it in your project?
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Less configuration is the motto, All you've to do is add the library in imports of the module which uses the features. Either you've only one app module or a shared module which is getting injected in all the modules or the module which gets loaded lazily, all we have to do is
 
-## Running end-to-end tests
+```ts
+import { NgTranscribeModule } from 'ng-transcribe'
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+@NgModule({
+    imports: [
+        CommonModule,
+        NgTranscribeModule
+    ]
+})
 
-## Further help
+```
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+Remember to export the module if you've added this inside a shared module.
+
+Create a locale.js file inside src folder similar to below example
+
+```js
+locale = {
+    configuration: {
+        language : 'pl',
+        fallback: 'en'
+    },
+    en : {
+        "welcome": "Welcome",
+        LOGIN : {
+            "log_in": "Log in",
+            "username": "Username",
+            "password": "Password"
+        }
+    },
+    pl : {
+        LOGIN : {
+            "log_in": "Zaloguj sie",
+            "username": "Nazwa Użytkownika"
+        }
+    }
+}
+```
+The file above is self explanatory, we set which is the language we have to pick the codes from and where do we have to look for if some code is missing in the primary language. We recommend using snake case for keys and not use '.'(period) as it will have adverse effects in picking the right value.
+
+One last thing, add the language file in scripts array of angular.json
+
+```ts
+ scripts: ["src/locale.js"]
+```
+
+That's it, start using,
+
+```html
+<h3>{{'welcome' | translate}}</h3>
+```
+
+It is straight-forward to use keys which are nested
+
+```html
+<span>{{'LOGIN.log_in' | translate}}</span>
+```
+
+Did you get the same question which I got, How do we pass the values dynamically? Brillient,
+
+```js
+ "welcome_message" : "Hello #{arg1}"
+```
+Add the strings which are to be replaced at runtime inside brackets and preceded it with a pound symbol like above. and pass the arguments as arrays. we believe this will work for all the cases and don't see any reason to go via a key value pair agruments
+
+```html
+<span>{{'welcome_message' : translate:['world']}}</span>
+```
+We can have any number of such identifiers, as long as we maintainn the order of arguments passed.
+
+You can also specify html as the content and use it in your templates.
+```js
+{
+    "welcome": "hello <b>world!</b>"
+}
+```
+
+To render them, simply use the innerHTML attribute with the pipe on any element.
+<h2 [innerHTML]="'welcome' | translate"></h2>
+
+You can construct the translation keys dynamically in your templates
+```html
+  <p>{{ 'LANGUAGES.' + language | translate }}</p>
+```
+Where languages is an array member of your component:
+languages = 'en'
+
+Not to mention, there are no restrictions if you want to add the translate pipe along with built-in/custom pipes.
+```html
+<span>{{'hello' | lowercase | translate}}</span>
+```
+
+Now, Let us see an example on how to use the APIs of the library. 
+
+```ts
+import { NgTranscribeService } from 'ng-translate'
+
+export class Home implements OnInit {
+  constructor (private _translate: NgTranscribeService) {}
+
+  ngOnInit() {
+    console.log(this._translate.t('LOGIN.log_in'))
+  }
+}
+```
+
+## Supported methods
+
+`t(key, args) `: accepts a key and the arguments array[optional] and returns the translated string
+`update('key', 'value') `: accepts two strings which will be added as a new key/value pair if the key doesn't   
+                            exists, updates the value if the key already exists.
+
+To all the methods above key can have a string which represents the nesting structure. 
+```js 
+  update('LOGIN.log_in', 'Sign Up')
+```  
