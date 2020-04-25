@@ -17,7 +17,15 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+      "ng-transcribe": [
+        "dist/ng-transcribe"
+      ],
+      "ng-transcribe/*": [
+        "dist/ng-transcribe/*"
+      ]
+    }
   },
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,
