@@ -67,7 +67,7 @@ The file above is self explanatory, we set which is the language we have to pick
 One last thing, add the language file in scripts array of angular.json
 
 ```ts
- scripts: ["src/locale.js"]
+scripts: ["src/locale.js"]
 ```
 
 That's it, start using,
@@ -106,7 +106,7 @@ To render them, simply use the innerHTML attribute with the pipe on any elemen
 
 You can construct the translation keys dynamically in your templates
 ```html
-  <p>{{ 'LANGUAGES.' + language | translate }}</p>
+<p>{{ 'LANGUAGES.' + language | translate }}</p>
 ```
 Where languages is an array member of your component:
 languages = 'en'
@@ -130,13 +130,19 @@ export class Home implements OnInit {
 }
 ```
 
+## Configuration
+`language : 'pl' ` : Primary language from which the values to be picked up.
+
+`fallback: 'en' ` : Secondary language from which the values to be picked up if the requested key is not present in the primary language hash
+
+
 ## Supported methods
 
 `t(key, args) `: accepts a key and the arguments array[optional] and returns the translated string
-`update('key', 'value') `: accepts two strings which will be added as a new key/value pair if the key doesn't   
-                            exists, updates the value if the key already exists.
+
+`update('key', 'value') `: accepts two strings which will be added as a new key/value pair if the key doesn't exists, updates the value if the key already exists.
 
 To all the methods above key can have a string which represents the nesting structure. 
 ```js 
-  update('LOGIN.log_in', 'Sign Up')
+update('LOGIN.log_in', 'Sign Up')
 ```  
