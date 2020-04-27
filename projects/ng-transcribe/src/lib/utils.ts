@@ -60,6 +60,27 @@ export class i18n {
         return str
     }
 
+    updateValue (key: string, value: string): void {
+      let keys = key.split('.')
+        if (keys.length > 1) {
+          this.updateDepthValue(this.locale[this.conf.language], keys, value, 0)
+        } else {
+          this.locale[this.conf.language][key] = value
+        }
+    }
+
+    updateDepthValue (schema: any, keys: string[], value: string, iterator: number) {
+      if(iterator !== keys.length-1) {
+        schema[keys[iterator]] = value
+      }
+      if(!schema[keys[iterator]]) {
+          schema[keys[iterator]] = {}
+          this.updateDepthValue(schema, keys, value, iterator+1)
+      } else {
+          this.updateDepthValue(schema[keys[iterator]], keys, value, iterator+1)
+      }
+    }
+
     changeLanguage (languageCode: string) {
         //Can utilize localstorage or session storage
         this.conf.language = languageCode
