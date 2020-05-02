@@ -30,9 +30,9 @@ export class i18n {
         let result: string = ''
         let keys = key.split('.')
         if (keys.length > 1) {
-        result = this.getDepthValue(this.locale[this.conf.language], keys) || this.getDepthValue(this.locale[this.conf.fallback], keys)
+        result = this.conf.fallback ? this.getDepthValue(this.locale[this.conf.language], keys) || this.getDepthValue(this.locale[this.conf.fallback], keys) : this.getDepthValue(this.locale[this.conf.language], keys)
         } else {
-            result = this.locale[this.conf.language][key] || this.locale[this.conf.fallback][key]
+            result = this.conf.fallback ? this.locale[this.conf.language][key] || this.locale[this.conf.fallback][key] : this.locale[this.conf.language][key]
         }
         return result || key
     }
