@@ -1,6 +1,7 @@
 {
   "name": "ng-transcribe",
   "version": "0.0.2",
+  "author": "Shyam Kumar",
   "homepage": "https://github.com/Ng-transcribe/Ng-transcribeModule#readme",
   "keywords": [
     "Angular",
@@ -14,7 +15,10 @@
     "type": "git",
     "url": "https://github.com/Ng-transcribe/Ng-transcribeModule"
   },
-  "license" : "BSD-3-Clause",
+  "bugs": {
+    "url": "https://github.com/Ng-transcribe/Ng-transcribeModule/issues"
+  },
+  "license" : "MIT",
   "peerDependencies": {
     "@angular/common": "^8.2.14",
     "@angular/core": "^8.2.14"

@@ -1,0 +1,14 @@
+language: node_js
+sudo: required
+notifications:
+  email: false
+node_js:
+  - '12'
+# safelist
+branches:
+  only:
+  - master
+after_success:
+  - npm run build
+  - cp README.md dist/ng-transcribe/
+  - cd dist/ng-transcribe/

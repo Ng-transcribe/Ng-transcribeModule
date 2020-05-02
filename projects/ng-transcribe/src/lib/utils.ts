@@ -28,11 +28,15 @@ export class i18n {
 
     getValue (key: string) : string {
         let result: string = ''
-        let keys = key.split('.')
-        if (keys.length > 1) {
-        result = this.getDepthValue(this.locale[this.conf.language], keys) || this.getDepthValue(this.locale[this.conf.fallback], keys)
-        } else {
-            result = this.locale[this.conf.language][key] || this.locale[this.conf.fallback][key]
+        let language = this.conf.language
+        if(language) {
+          let fallback = this.conf.fallback
+          let keys = key.split('.')
+          if (keys.length > 1) {
+          result = fallback ? this.getDepthValue(this.locale[language], keys) || this.getDepthValue(this.locale[fallback], keys) : this.getDepthValue(this.locale[language], keys)
+          } else {
+              result = fallback ? this.locale[language][key] || this.locale[fallback][key] : this.locale[language][key]
+          }
         }
         return result || key
     }
