@@ -4,10 +4,6 @@ notifications:
   email: false
 node_js:
   - '12'
-before_install:
-  - if [[ `npm -v` != 6* ]]; then npm i -g npm@6; fi
-addons:
-  chrome: stable
 # safelist
 branches:
   only:
