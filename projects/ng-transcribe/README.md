@@ -44,7 +44,7 @@ Create a locale.js file inside src folder similar to below example
 locale = {
     configuration: {
         language : 'pl',
-        fallback: 'en'
+        fallback: 'en' //optional
     },
     en : {
         "welcome": "Welcome",
