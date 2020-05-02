@@ -9,8 +9,6 @@ branches:
   only:
   - master
 after_success:
-  - npm run lint
-  - npm run test
   - npm run build
   - cp README.md dist/ng-transcribe/
   - cd dist/ng-transcribe/
