@@ -74,8 +74,9 @@ export class i18n {
     }
 
     updateDepthValue (schema: any, keys: string[], value: string, iterator: number) {
-      if(iterator !== keys.length-1) {
+      if(iterator == keys.length-1) {
         schema[keys[iterator]] = value
+        return
       }
       if(!schema[keys[iterator]]) {
           schema[keys[iterator]] = {}
