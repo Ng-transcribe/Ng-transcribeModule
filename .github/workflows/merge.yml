@@ -47,7 +47,6 @@ jobs:
         registry-url: https://registry.npmjs.org/
       
     - name: Publish to npm registry
-      working-directory: ./dist/ng-transcribe
       run: npm publish --access public
       env:
         NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
