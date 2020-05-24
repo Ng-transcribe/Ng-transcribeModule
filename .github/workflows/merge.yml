@@ -37,8 +37,14 @@ jobs:
     - name: Build and copy
       run: |
         npm run build --if-present,
-        - cp README.md dist/ng-transcribe/,
         echo test, and deploy your project.
+        
+    - uses: actions/checkout@master
+    - name: copy file
+      uses: canastro/copy-file-action@master
+      with:
+        source: "README.md"
+        target: "dist/ng-transcribe/README.md"
         
     - name: Git Semantic Version
       uses: PaulHatch/semantic-version@v2.1.1
