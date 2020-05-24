@@ -39,12 +39,15 @@ jobs:
         npm run build --if-present,
         echo test, and deploy your project.
         
-    - name: Publish to NPM registry
+    - name: Setup to NPM registry
       working-directory: ./dist/ng-transcribe
     - uses: actions/setup-node@v1
       with:
         node-version: '12.x'
         registry-url: https://registry.npmjs.org/
-    - run: npm publish --access public
+      
+    - name: Publish to npm registry
+      working-directory: ./dist/ng-transcribe
+      run: npm publish --access public
       env:
         NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
