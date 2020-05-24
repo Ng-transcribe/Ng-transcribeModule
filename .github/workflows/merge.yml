@@ -41,4 +41,6 @@ jobs:
         
     - name: echo working directory
       working-directory: ./dist/ng-transcribe
-      run: echo pwd
+      run: npm publish --access public
+      env:
+          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
