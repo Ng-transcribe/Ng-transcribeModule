@@ -35,9 +35,7 @@ jobs:
 
     # Runs a set of commands using the runners shell
     - name: Build and copy
-      run: |
-        npm run build --if-present,
-        echo test, and deploy your project.
+      run: npm run build --if-present
         
     - name: Setup to NPM registry
       uses: actions/setup-node@v1
@@ -48,5 +46,6 @@ jobs:
     - name: Publish to npm registry
       working-directory: ./dist/ng-transcribe
       run: npm publish --access public
+      if: github.event == 'push'
       env:
         NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
