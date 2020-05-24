@@ -1,4 +1,4 @@
-# NgTranscribe
+# NgTranscribe![CI](https://github.com/Ng-transcribe/Ng-transcribeModule/workflows/CI/badge.svg?branch=master)
 
 A simple and intuitive library to support Internationalisation in Angular applications.
 
