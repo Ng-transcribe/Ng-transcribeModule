@@ -18,7 +18,10 @@
   "bugs": {
     "url": "https://github.com/Ng-transcribe/Ng-transcribeModule/issues"
   },
-  "license" : "MIT",
+  "license": "MIT",
+  "dependencies": {
+    "tslib": "^2.0.0"
+  },
   "peerDependencies": {
     "@angular/common": "^8.2.14",
     "@angular/core": "^8.2.14"
